@@ -1,0 +1,38 @@
+services:
+  
+  django:
+    build: .
+    container_name: "django"
+    ports:
+      - "8000:8000"
+    volumes:
+      - .:/home/my-user/app
+      - external-storage:/media/uploads
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
+  
+  django_db:
+    container_name: "django_db"
+    image: postgres:15.8-alpine3.20
+    ports:
+      - "5434:5432"
+    environment:
+      - POSTGRES_PASSWORD=postgres
+      - POSTGRES_DB=mydb
+  
+  pgadmin:
+    image: dpage/pgadmin4
+    container_name: django_pgadmin
+    ports:
+      - "5050:80"
+    environment:
+      PGADMIN_DEFAULT_EMAIL: teste@teste.com
+      PGADMIN_DEFAULT_PASSWORD: teste
+    depends_on:
+      - django_db
+
+
+volumes:
+  external-storage:
+    external: true
+      

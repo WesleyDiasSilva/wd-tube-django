@@ -81,10 +81,10 @@ DATABASES = {
     # }
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'wd-tube',
-        'USER':'wesley',
-        'PASSWORD':'963741@Wes',
-        'HOST':'localhost',
+        'NAME': 'mydb',
+        'USER':'postgres',
+        'PASSWORD':'postgres',
+        'HOST':'django_db',
         'PORT':'5432'
     }
 }
